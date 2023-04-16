@@ -23,5 +23,5 @@ jobs:
             sudo docker stop telegram-bot
             sudo docker rm telegram-bot
             sudo docker build -t bot-times-two:latest .
-            sudo docker run -dp --name telegram-bot
+            sudo docker run -dp --name telegram-bot bot-times-two
           debug: true
