@@ -19,9 +19,10 @@ jobs:
           hosts: ${{ secrets.SERVER_HOST }}
           privateKey: ${{ secrets.PRIVATE_KEY }}
           command: |
+            echo "Test!"
             cd /opt/bots/bot-times-two
             sudo docker stop telegram-bot
             sudo docker rm telegram-bot
-            sudo docker build -t bot-times-two:latest .
-            sudo docker run -dp --name telegram-bot bot-times-two
+            sudo docker build -t bot-times-two .
+            sudo docker run -d --name telegram-bot bot-times-two
           debug: true
