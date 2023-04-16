@@ -1,0 +1,27 @@
+name: Deploy Telegram Bot
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to Ubuntu server
+        uses: JimCronqvist/action-ssh@master
+        with:
+          hosts: ${{ secrets.SERVER_HOST }}
+          privateKey: ${{ secrets.PRIVATE_KEY }}
+          command: |
+            cd /opt/bots/bot-times-two
+            sudo docker stop telegram-bot
+            sudo docker rm telegram-bot
+            sudo docker build -t bot-times-two:latest .
+            sudo docker run -dp --name telegram-bot
+          debug: true
