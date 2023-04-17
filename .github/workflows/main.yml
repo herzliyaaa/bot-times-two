@@ -3,7 +3,7 @@ name: Deploy Telegram Bot
 on:
   push:
     branches:
-      - master
+      - github-actions
 
 jobs:
   build:
@@ -19,10 +19,7 @@ jobs:
           hosts: ${{ secrets.SERVER_HOST }}
           privateKey: ${{ secrets.PRIVATE_KEY }}
           command: |
-            echo "Test!"
             cd /opt/bots/bot-times-two
-            sudo docker stop telegram-bot
-            sudo docker rm telegram-bot
-            sudo docker build -t bot-times-two .
-            sudo docker run -d --name telegram-bot bot-times-two
+            ls -a
+
           debug: true
